@@ -1,14 +1,27 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Главная страница</title>
-</head>
-<body>
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+
+{% block classes %}
+    <a class="me-3 py-2 link-body-emphasis text-decoration-none" target = "_blank" href="{% url 'home' %}">Главная</a>
+    <a class="me-3 py-2 link-body-emphasis text-decoration-none" target = "_blank" href="{% url 'about' %}">Про нас</a>
+{% endblock %}
+
+
+{% block content %}
     <h1>Главная страница</h1>
-    <p>7-8</p>
-</body>
-</html>
+    {% if tasks %}
+        {% for el in tasks %}
+            <div class = "alert alert-warning mt-2">
+                <h3>{{ el.title }}</h3>
+                <p>{{ el.task }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>У нас нет записей!</p>
+    {% endif %}
+{% endblock %}
